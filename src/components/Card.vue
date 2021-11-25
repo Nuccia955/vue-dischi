@@ -5,8 +5,8 @@
                 <img :src="img" alt="title">
             </div>
             <div class="text">
-                <h3>{{ title }}</h3>
-                <h4>{{ subtitle }}</h4>
+                <h5 class="title">{{ title }}</h5>
+                <h6 class="subtitle">{{ subtitle }}</h6>
                 <span>{{ year }}</span>
                 <h6>{{ span }}</h6>
             </div>
@@ -32,15 +32,38 @@ export default {
 
 li {
     width: calc((100% / 8) - 35px);
-    margin: 0 17.5px;
+    margin: 0 17.5px 20px;
     padding: 20px;
     background-color: $bg_secondary;
+    .cover {
+        margin-bottom: 1em;
+        min-height: 95px;
+        max-height: 150px;
+    }
     .text {
-        h3,
+        .title{
+            font-size: 0.9em;
+            line-height: 1.3em;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .subtitle {
+            font-size: 0.85em;
+            margin: 0;
+        }
+        span {
+            font-size: 0.8em;
+        }
+        h6 {
+            margin: 0;
+            font-size: 0.8em;
+        }
+        h5,
         h6 {
             color: $color_primary;
         }
-        h4,
+        h6.subtitle,
         span {
             color: $color_secondary;
         }

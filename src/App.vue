@@ -2,7 +2,7 @@
     <div id="app" class="d-flex flex-column h-100">
         <Header />
 
-        <main class="flex-grow-1">
+        <main class="flex-grow-1 overflow-auto">
             <CardList />
         </main>
     </div>
