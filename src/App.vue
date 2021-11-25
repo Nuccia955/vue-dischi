@@ -28,6 +28,9 @@ body {
   height: 100vh;
   #app {
     background-color: $bg_primary;
+    img {
+      max-width: 100%;
+    }
     ul {
       list-style: none;
       margin: 0;
