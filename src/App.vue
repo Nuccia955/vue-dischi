@@ -1,27 +1,56 @@
 <template>
     <div id="app" class="d-flex flex-column h-100">
-        <Header />
+        <Header @selectGenre="searchAlbums"/>
 
         <main class="flex-grow-1 overflow-auto">
-            <CardList />
+            <CardList :list="filteredAlbumList"/>
         </main>
     </div>
 </template>
 
 <script>
+import axios from 'axios'
 import Header from '@/components/Header.vue'
 import CardList from '@/components/CardList.vue'
 export default {
-  name: 'App',
-  components: {
-    Header,
-    CardList,
-  }
+    name: 'App',
+    components: {
+        Header,
+        CardList,
+    },
+    data() {
+        return {
+            albums: null,
+            searchedGenre: '',
+        }
+    },
+    created() {
+        this.getAlbums();
+    },
+    computed: {
+        filteredAlbumList() {
+            if(this.searchedGenre === '') {
+              return this.albums
+            } else {
+              return this.albums.filter(album => album.genre === this.searchedGenre)
+            }
+        }
+    },
+    methods: {
+        getAlbums() {
+            axios.get('https://flynn.boolean.careers/exercises/api/array/music').then(result => {
+                this.albums = result.data.response;
+            }).catch(error => console.log(error));
+        },
+        searchAlbums(genre) {
+          this.searchedGenre = genre;
+          console.log(this.searchedGenre);
+        }
+    }
 }
 </script>
 
 <style lang="scss">
-@import '~bootstrap/scss/bootstrap.scss';
 @import '@/styles/colors.scss';
 
 body {
