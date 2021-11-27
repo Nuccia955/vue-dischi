@@ -1,6 +1,6 @@
 <template>
     <div id="app" class="d-flex flex-column h-100">
-        <Header :list="albums" @selectGenre="searchAlbums"/>
+        <Header :genres="filterGenres" @selectGenre="searchAlbums"/>
 
         <main class="flex-grow-1 overflow-auto">
             <CardList :list="filteredAlbumList"/>
@@ -22,6 +22,8 @@ export default {
         return {
             albums: null,
             searchedGenre: '',
+            genres: [],
+            filteredGenres: [],
         }
     },
     created() {
@@ -34,12 +36,24 @@ export default {
             } else {
               return this.albums.filter(album => album.genre === this.searchedGenre)
             }
+        },
+        filterGenres() {
+          this.genres.forEach(el => {
+            if(!this.filteredGenres.includes(el)) {
+              this.filteredGenres.push(el);
+            }
+          });
+          return this.filteredGenres
         }
     },
     methods: {
         getAlbums() {
             axios.get('https://flynn.boolean.careers/exercises/api/array/music').then(result => {
                 this.albums = result.data.response;
+                this.albums.forEach(album => {
+                  this.genres.push(album.genre);
+                });
+                console.log(this.genres)
             }).catch(error => console.log(error));
         },
         searchAlbums(genre) {
