@@ -1,6 +1,6 @@
 <template>
     <div id="app" class="d-flex flex-column h-100">
-        <Header @selectGenre="searchAlbums"/>
+        <Header :list="albums" @selectGenre="searchAlbums"/>
 
         <main class="flex-grow-1 overflow-auto">
             <CardList :list="filteredAlbumList"/>
