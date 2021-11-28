@@ -1,9 +1,9 @@
 <template>
-    <header class="p-1">
+    <header class="p-1 d-flex align-items-center justify-content-between">
         <img src="../assets/logo (1).png" alt="Spotify Logo">
-        <select @change="onChange">
-            <option value="">All</option>
-            <option v-for="(genre,index) in genres" :key="`genre ${index}`" :value="genre">
+        <select class="mx-4" @change="onChange">
+            <option class="custom-option" value="">All</option>
+            <option class="custom-option" v-for="(genre,index) in genres" :key="`genre ${index}`" :value="genre">
                 {{ genre }}
             </option>
         </select>
@@ -30,6 +30,15 @@ header {
     background-color: $bg_secondary;
     img {
         width: 40px;
+    }
+    select, 
+    select option.custom-option {
+        width: 100px;
+        background-color: $bg_primary;
+        padding: 5px 10px;
+        border-color: transparent;
+        border-radius: 5px;
+        color: $color_theme;
     }
 }
 </style>
